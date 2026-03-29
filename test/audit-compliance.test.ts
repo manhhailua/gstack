@@ -76,6 +76,13 @@ describe('Audit compliance', () => {
     expect(review).toContain('Data NOT sent');
   });
 
+  // Round 2 Fix 3: Extension sender validation + message type allowlist
+  test('extension background.js validates message sender', () => {
+    const bg = readFileSync(join(ROOT, 'extension/background.js'), 'utf-8');
+    expect(bg).toContain('sender.id !== chrome.runtime.id');
+    expect(bg).toContain('ALLOWED_TYPES');
+  });
+
   // Round 2 Fix 4: Chrome CDP binds to localhost only
   test('chrome-cdp binds to localhost only', () => {
     const cdp = readFileSync(join(ROOT, 'bin/chrome-cdp'), 'utf-8');
