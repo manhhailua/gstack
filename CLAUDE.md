@@ -193,6 +193,12 @@ or `--prefix` to skip the interactive prompt.
 gen-skill-docs pipeline, consider whether the changes should be tested in isolation
 before going live (especially if the user is actively using gstack in other windows).
 
+**Upgrade migrations:** When a change modifies on-disk state (directory structure,
+config format, stale files) in ways that could break existing user installs, add a
+migration script to `gstack-upgrade/migrations/`. Read CONTRIBUTING.md's "Upgrade
+migrations" section for the format and testing requirements. The upgrade skill runs
+these automatically after `./setup` during `/gstack-upgrade`.
+
 ## Compiled binaries — NEVER commit browse/dist/ or design/dist/
 
 The `browse/dist/` and `design/dist/` directories contain compiled Bun binaries

@@ -392,6 +392,56 @@ When community PRs accumulate, batch them into themed waves:
 
 See [PR #205](../../pull/205) (v0.8.3) for the first wave as an example.
 
+## Upgrade migrations
+
+When a release changes on-disk state (directory structure, config format, stale
+files) in ways that `./setup` alone can't fix, add a migration script so existing
+users get a clean upgrade.
+
+### When to add a migration
+
+- Changed how skill directories are created (symlinks vs real dirs)
+- Renamed or moved config keys in `~/.gstack/config.yaml`
+- Need to delete orphaned files from a previous version
+- Changed the format of `~/.gstack/` state files
+
+Don't add a migration for: new features (users get them automatically), new
+skills (setup discovers them), or code-only changes (no on-disk state).
+
+### How to add one
+
+1. Create `gstack-upgrade/migrations/v{VERSION}.sh` where `{VERSION}` matches
+   the VERSION file for the release that needs the fix.
+2. Make it executable: `chmod +x gstack-upgrade/migrations/v{VERSION}.sh`
+3. The script must be **idempotent** (safe to run multiple times) and
+   **non-fatal** (failures are logged but don't block the upgrade).
+4. Include a comment block at the top explaining what changed, why the
+   migration is needed, and which users are affected.
+
+Example:
+
+```bash
+#!/usr/bin/env bash
+# Migration: v0.15.2.0 — Fix skill directory structure
+# Affected: users who installed with --no-prefix before v0.15.2.0
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+"$SCRIPT_DIR/bin/gstack-relink" 2>/dev/null || true
+```
+
+### How it runs
+
+During `/gstack-upgrade`, after `./setup` completes (Step 4.75), the upgrade
+skill scans `gstack-upgrade/migrations/` and runs every `v*.sh` script whose
+version is newer than the user's old version. Scripts run in version order.
+Failures are logged but never block the upgrade.
+
+### Testing migrations
+
+Migrations are tested as part of `bun test` (tier 1, free). The test suite
+verifies that all migration scripts in `gstack-upgrade/migrations/` are
+executable and parse without syntax errors.
+
 ## Shipping your changes
 
 When you're happy with your skill edits:
