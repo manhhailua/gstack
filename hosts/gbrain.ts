@@ -1,5 +1,10 @@
 import type { HostConfig } from '../scripts/host-config';
 
+/**
+ * GBrain host config.
+ * Compatible with GBrain >= v0.10.0 (doctor --fast --json, search CLI, entity enrichment).
+ * When updating, check INSTALL_FOR_AGENTS.md in the GBrain repo for breaking changes.
+ */
 const gbrain: HostConfig = {
   name: 'gbrain',
   displayName: 'GBrain',
@@ -13,7 +18,7 @@ const gbrain: HostConfig = {
 
   frontmatter: {
     mode: 'allowlist',
-    keepFields: ['name', 'description'],
+    keepFields: ['name', 'description', 'triggers'],
     descriptionLimit: null,
   },
 

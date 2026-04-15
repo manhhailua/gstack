@@ -49,8 +49,9 @@ const hermes: HostConfig = {
     'CODEX_SECOND_OPINION',
     'CODEX_PLAN_REVIEW',
     'REVIEW_ARMY',
-    'GBRAIN_CONTEXT_LOAD',
-    'GBRAIN_SAVE_RESULTS',
+    // GBRAIN_CONTEXT_LOAD and GBRAIN_SAVE_RESULTS are NOT suppressed.
+    // The resolvers handle GBrain-not-installed gracefully ("proceed without brain context").
+    // If Hermes has GBrain as a mod, brain features activate automatically.
   ],
 
   runtimeRoot: {
