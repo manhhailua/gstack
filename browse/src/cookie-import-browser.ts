@@ -493,9 +493,10 @@ async function getWindowsAesKey(browser: BrowserInfo): Promise<Buffer> {
   let localState: any;
   try {
     localState = JSON.parse(fs.readFileSync(localStatePath, 'utf-8'));
-  } catch {
+  } catch (err) {
+    const reason = err instanceof Error ? `: ${err.message}` : '';
     throw new CookieImportError(
-      `Cannot read Local State for ${browser.name} at ${localStatePath}`,
+      `Cannot read Local State for ${browser.name} at ${localStatePath}${reason}`,
       'keychain_error',
     );
   }
