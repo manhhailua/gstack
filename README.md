@@ -6,7 +6,7 @@ When I heard Karpathy say this, I wanted to find out how. How does one person sh
 
 I'm [Garry Tan](https://x.com/garrytan), President & CEO of [Y Combinator](https://www.ycombinator.com/). I've worked with thousands of startups — Coinbase, Instacart, Rippling — when they were one or two people in a garage. Before YC, I was one of the first eng/PM/designers at Palantir, cofounded Posterous (sold to Twitter), and built Bookface, YC's internal social network.
 
-**gstack is my answer.** I've been building products for twenty years, and right now I'm shipping more code than I ever have. In the last 60 days: **600,000+ lines of production code** (35% tests), **10,000-20,000 lines per day**, part-time, while running YC full-time. Here's my last `/retro` across 3 projects: **140,751 lines added, 362 commits, ~115k net LOC** in one week.
+**gstack is my answer.** I've been building products for twenty years, and right now I'm shipping more products than I ever have. In the last 60 days: 3 production services, 40+ shipped features, part-time, while running YC full-time. On logical code change — not raw LOC, which AI inflates — my 2026 output is <!-- GSTACK-THROUGHPUT-PLACEHOLDER --> my 2013 output pro-rata. (Public repos only; private work at both eras is excluded to make the comparison apples-to-apples.) AI wrote most of it. The point isn't who typed it, it's what shipped.
 
 **2026 — 1,237 contributions and counting:**
 
@@ -37,6 +37,10 @@ Fork it. Improve it. Make it yours. And if you want to hate on free open source 
 4. Run `/review` on any branch with changes
 5. Run `/qa` on your staging URL
 6. Stop there. You'll know if this is for you.
+
+## Writing style
+
+v1 prompts = simpler. gstack's default output explains technical terms on first use, frames questions in outcome terms ("what breaks for your users if..."), and keeps sentences short. Good writing for everyone, not just non-technical folks. If you'd rather read the older, tighter prose style with no glosses, run `gstack-config set explain_level terse` — it sticks across all skills. You can also tune how often gstack asks you questions with `/plan-tune`.
 
 ## Install — 30 seconds
 
@@ -349,7 +353,7 @@ Free, MIT licensed, open source. No premium tier, no waitlist.
 
 I open sourced how I build software. You can fork it and make it your own.
 
-> **We're hiring.** Want to ship 10K+ LOC/day and help harden gstack?
+> **We're hiring.** Want to ship real products at AI-coding speed and help harden gstack?
 > Come work at YC — [ycombinator.com/software](https://ycombinator.com/software)
 > Extremely competitive salary and equity. San Francisco, Dogpatch District.
 
